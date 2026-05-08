@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Uttertech | Consulting & Technology Solutions</title>
+  <!-- Bootstrap 5 CSS + Icons + core JS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts for modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafc;
+      color: #1a2c3e;
+      scroll-behavior: smooth;
+    }
+
+    /* custom brand & accent */
+    :root {
+      --utt-primary: #0b2b40;
+      --utt-accent: #e67e22;
+      --utt-soft: #f4f7fc;
+      --utt-gray: #5a6e7c;
+    }
+
+    /* Navbar brand: flex container for logo + text on same line */
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      padding: 0;
+    }
+    .logo-img {
+      height: 42px;
+      width: auto;
+      display: inline-block;
+      object-fit: contain;
+    }
+    .brand-text {
+      font-weight: 800;
+      font-size: 1.7rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #0b2b40 0%, #1e4a6e 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .brand-text span {
+      color: var(--utt-accent);
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+    .nav-link {
+      font-weight: 600;
+      color: #1e3a4d !important;
+      transition: 0.2s;
+      margin: 0 0.2rem;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--utt-accent) !important;
+    }
+    .btn-utt-primary {
+      background-color: var(--utt-primary);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+    .btn-utt-primary:hover {
+      background-color: #e67e22;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(230,126,34,0.2);
+    }
+    .hero-section {
+      background: linear-gradient(120deg, #eef2f5 0%, #ffffff 100%);
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .service-card {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.03);
+      border: 1px solid #eef2f0;
+      height: 100%;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 35px -12px rgba(0,0,0,0.1);
+      border-color: #f0d2b0;
+    }
+    .service-icon {
+      font-size: 2.8rem;
+      color: var(--utt-accent);
+      margin-bottom: 1.2rem;
+    }
+    .contact-info-item {
+      background: white;
+      border-radius: 20px;
+      padding: 1.2rem;
+      transition: 0.15s;
+      border: 1px solid #e9ecef;
+    }
+    footer {
+      background-color: #0a1c28;
+      color: #cddfe7;
+    }
+    .footer-links a {
+      color: #bdd3e0;
+      text-decoration: none;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+    .footer-links a:hover {
+      color: #e67e22;
+      padding-left: 4px;
+    }
+    .copyright-bar {
+      background-color: #05141e;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+    }
+    .quick-links-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .quick-links-list li {
+      margin-bottom: 0.5rem;
+    }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      transition: 0.2s;
+      color: #cddfe7;
+    }
+    .social-icons a:hover {
+      background: var(--utt-accent);
+      color: white;
+      transform: translateY(-3px);
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--utt-accent);
+      border-radius: 4px;
+    }
+    .card-img-placeholder {
+      background: #e9ecef;
+      height: 140px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .page-section {
+      scroll-margin-top: 80px;
+    }
+    .footer-heading {
+      font-weight: 700;
+      margin-bottom: 1.3rem;
+      font-size: 1.2rem;
+      color: white;
+      letter-spacing: -0.2px;
+    }
+    @media (max-width: 768px) {
+      .hero-section {
+        text-align: center;
+        padding: 2rem 0;
+      }
+      .section-title:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        text-align: center;
+      }
+      .navbar-brand {
+        gap: 8px;
+      }
+      .logo-img {
+        height: 34px;
+      }
+      .brand-text {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar (Home, Services, Contacts) with LOGO + "Uttertech" text on same line -->
+<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm py-2">
+  <div class="container">
+    <!-- Brand: logo image + text "Uttertech" side by side -->
+    <a class="navbar-brand" href="#home">
+      <img src="utterTech_Logo.png" alt="Uttertech Logo" class="logo-img">
+      <span class="brand-text">Utter<span>tech</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contacts</a></li>
+      </ul>
+      <div class="ms-lg-3 mt-2 mt-lg-0">
+        <a href="#contact" class="btn btn-utt-primary btn-sm">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT: HOME section -->
+<section id="home" class="hero-section page-section">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <div class="badge bg-warning bg-opacity-10 text-dark mb-3 px-3 py-2 rounded-pill">
+          <i class="bi bi-cpu me-1"></i> Next‑gen consulting
+        </div>
+        <h1 class="display-4 fw-bold mb-3" style="color: #0b2b40;">Innovate. Transform.<br><span style="color: #e67e22;">Scale with Uttertech.</span></h1>
+        <p class="lead text-secondary mb-4">Empowering businesses with cutting-edge technology consulting, intelligent automation, and enterprise solutions. We deliver future-ready digital ecosystems.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#services" class="btn btn-utt-primary px-4 py-2">Explore services</a>
+          <a href="#contact" class="btn btn-outline-secondary px-4 py-2 border-2 rounded-pill">Talk to expert</a>
+        </div>
+        <div class="row mt-5">
+          <div class="col-4">
+            <h3 class="fw-bold mb-0">10+</h3>
+            <small>Enterprise clients</small>
+          </div>
+          <div class="col-4">
+            <h3 class="fw-bold mb-0">15+</h3>
+            <small>Projects delivered</small>
+          </div>
+          <div class="col-4">
+            <h3 class="fw-bold mb-0">3+</h3>
+            <small>Awards</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <div class="bg-white rounded-4 shadow-lg p-3 d-inline-block">
+          <img src="https://placehold.co/540x380/0b2b40/ffffff?text=Uttertech+Digital+Solutions" alt="Uttertech Illustration" class="img-fluid rounded-3" style="max-height: 360px; width: auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES Section -->
+<section id="services" class="py-5 page-section" style="background: #ffffff;">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="section-title display-6 fw-bold">Core Services</h2>
+      <p class="text-secondary col-lg-8 mx-auto mt-3">End-to-end technology consulting & digital transformation tailored to your business ambitions.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-cloud-arrow-up"></i></div>
+          <h4 class="fw-bold">Cloud & DevOps</h4>
+          <p class="text-secondary">Seamless cloud migration, AWS/Azure architecture, CI/CD pipelines and infrastructure as code for reliable scalability.</p>
+          <a href="#contact" class="stretched-link text-decoration-none small fw-semibold">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-diagram-3"></i></div>
+          <h4 class="fw-bold">AI & Data Analytics</h4>
+          <p class="text-secondary">Leverage machine learning, predictive analytics, and intelligent automation to unlock hidden business insights.</p>
+          <a href="#contact" class="stretched-link text-decoration-none small fw-semibold">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-phone"></i></div>
+          <h4 class="fw-bold">Digital Experience</h4>
+          <p class="text-secondary">Modern web & mobile apps, UX/UI strategy, and full-stack engineering that delights users and drives growth.</p>
+          <a href="#contact" class="stretched-link text-decoration-none small fw-semibold">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-shield-lock"></i></div>
+          <h4 class="fw-bold">Cybersecurity</h4>
+          <p class="text-secondary">Risk assessment, compliance, threat monitoring and zero‑trust architectures to protect your digital assets.</p>
+          <a href="#contact" class="stretched-link text-decoration-none small fw-semibold">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-kanban"></i></div>
+          <h4 class="fw-bold">ERP & Digital Core</h4>
+          <p class="text-secondary">Modern ERP integration, process automation and end-to-end digital core modernization for mid/large enterprises.</p>
+          <a href="#contact" class="stretched-link text-decoration-none small fw-semibold">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-graph-up"></i></div>
+          <h4 class="fw-bold">IT Strategy</h4>
+          <p class="text-secondary">Technology roadmap, vendor selection, enterprise architecture & innovation advisory to future-proof your business.</p>
+          <a href="#contact" class="stretched-link text-decoration-none small fw-semibold">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT section -->
+<section id="contact" class="py-5 page-section" style="background: #f8f9fe;">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="section-title display-6 fw-bold">Let’s connect</h2>
+      <p class="text-secondary col-md-8 mx-auto">Ready to transform your ideas into reality? Reach out — our team is excited to partner with you.</p>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <div class="bg-white rounded-4 shadow-sm p-4 h-100">
+          <h4 class="fw-bold mb-4"><i class="bi bi-geo-alt-fill text-warning me-2"></i> Visit Us</h4>
+          <div class="contact-info-item mb-3">
+            <i class="bi bi-building fs-5 me-3" style="color:#e67e22;"></i>
+            <strong>Addis Ababa, Ethiopia</strong><br>
+            Bole Road, Olympia Tower, 4th Floor
+          </div>
+          <div class="contact-info-item mb-3">
+            <i class="bi bi-telephone-fill fs-5 me-3" style="color:#e67e22;"></i>
+            <strong>Phone</strong><br>+251 911 234 567
+          </div>
+          <div class="contact-info-item mb-3">
+            <i class="bi bi-envelope-fill fs-5 me-3" style="color:#e67e22;"></i>
+            <strong>Email</strong><br>hello@uttertech.com
+          </div>
+          <div class="mt-4">
+            <h6 class="fw-bold">Office hours</h6>
+            <p class="small mb-0">Monday – Friday: 9:00 AM – 6:00 PM (EAT)<br>Saturday: 10:00 AM – 2:00 PM</p>
+          </div>
+          <div class="social-icons mt-4 d-flex gap-2">
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="bg-white rounded-4 shadow-sm p-4 h-100">
+          <h4 class="fw-bold mb-3">Send a Message</h4>
+          <form id="contactForm" action="#" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Full name</label>
+                <input type="text" class="form-control" id="fullName" placeholder="John Doe" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email address</label>
+                <input type="email" class="form-control" id="emailAddr" placeholder="hello@example.com" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Service interest</label>
+                <select class="form-select" id="serviceInterest">
+                  <option selected>Cloud & DevOps</option>
+                  <option>AI & Data Analytics</option>
+                  <option>Digital Experience</option>
+                  <option>Cybersecurity</option>
+                  <option>ERP & Digital Core</option>
+                  <option>IT Strategy</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Message</label>
+                <textarea class="form-control" rows="4" placeholder="Tell us about your project..." id="messageText"></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-utt-primary px-4 py-2 rounded-pill">Submit inquiry <i class="bi bi-send ms-1"></i></button>
+                <div id="formFeedback" class="mt-2 small"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER with three divisions: Our services, Quick Links, Address + Copyright new division -->
+<footer>
+  <div class="container pt-5 pb-3">
+    <div class="row gy-4">
+      <!-- First Footer Column: Our Services (detailed) -->
+      <div class="col-md-4">
+        <div class="footer-heading"><i class="bi bi-gear-wide-connected me-2"></i> Our Services</div>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#services">Cloud & DevOps Solutions</a></li>
+          <li><a href="#services">e-Commerce Solutions</a></li>
+          <li><a href="#services">AI & Advanced Analytics</a></li>
+          <li><a href="#services">Digital Experience Platforms</a></li>
+          <li><a href="#services">Cybersecurity & Compliance</a></li>
+          <li><a href="#services">ERP Modernization</a></li>
+          <li><a href="#services">Technology Strategy</a></li>
+        </ul>
+      </div>
+      <!-- Second Footer Column: Quick Links -->
+      <div class="col-md-3">
+        <div class="footer-heading"><i class="bi bi-link-45deg me-2"></i> Quick Links</div>
+        <ul class="quick-links-list footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">All Services</a></li>
+          <li><a href="#contact">Contact & Support</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Projects Showcase</a></li>
+        </ul>
+      </div>
+      <!-- Third Footer Column: Address + additional contact info -->
+      <div class="col-md-5">
+        <div class="footer-heading"><i class="bi bi-pin-map-fill me-2"></i> Address</div>
+        <address class="mb-3 lh-lg">
+          <i class="bi bi-building me-1"></i> Uttertech Consulting & Technology Solutions PLC<br>
+          Olympia Business Center, Bole Subcity<br>
+          Addis Ababa, Ethiopia<br>
+          <i class="bi bi-telephone-outbound me-1"></i> +251 911 03 70 49 or +251 920 25 15 98<br>
+          <i class="bi bi-envelope-paper me-1"></i> info@uttertech.com
+        </address>
+        <div class="mt-2">
+          <span class="badge bg-secondary bg-opacity-25 px-3 py-2 rounded"><i class="bi bi-globe2"></i> Global delivery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright new Division (separate row) as requested -->
+  <div class="copyright-bar py-3 mt-3">
+    <div class="container text-center">
+      <p class="mb-0 small">Copyright Uttrertech Consulting and Technology Solutions PLC. All rights reserved. &copy; 2025</p>
+      <p class="mb-0 small mt-1"><i class="bi bi-shield-check"></i> Innovating the Ethiopian tech ecosystem & beyond</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS Bundle + custom interactive form handling -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Smooth scroll for all anchor links with hash + active nav highlight
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#" || targetId === "") return;
+      const targetElem = document.querySelector(targetId);
+      if (targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        // update active class on nav items manually (optional)
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        if (this.classList.contains('nav-link')) this.classList.add('active');
+        else {
+          // find matching nav link
+          const matchingNav = document.querySelector(`.nav-link[href="${targetId}"]`);
+          if(matchingNav) matchingNav.classList.add('active');
+        }
+      }
+    });
+  });
+
+  // active nav update on scroll (visibility tracking)
+  const sections = document.querySelectorAll('.page-section');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  function updateActiveSection() {
+    let current = '';
+    const scrollPos = window.scrollY + 150;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if(scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href')?.substring(1);
+      if(href === current) {
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', updateActiveSection);
+  window.addEventListener('load', updateActiveSection);
+  
+  // Contact form submission simulation with Bootstrap style feedback (no actual server post, but nice UX)
+  const contactForm = document.getElementById('contactForm');
+  const feedbackDiv = document.getElementById('formFeedback');
+  
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('emailAddr').value.trim();
+    const message = document.getElementById('messageText').value.trim();
+
+    if(name === "" || email === "" || !email.includes('@')) {
+      feedbackDiv.innerHTML = `<div class="alert alert-danger alert-dismissible fade show py-2" role="alert">❌ Please enter a valid name and email address.</div>`;
+      setTimeout(() => { if(feedbackDiv.firstChild) feedbackDiv.innerHTML = ''; }, 3000);
+      return;
+    }
+    
+    // Success simulation
+    feedbackDiv.innerHTML = `<div class="alert alert-success alert-dismissible fade show py-2" role="alert">✨ Thanks, ${name}! Your message has been received. We'll reach out shortly.</div>`;
+    contactForm.reset();
+    setTimeout(() => {
+      if(feedbackDiv.firstChild) feedbackDiv.innerHTML = '';
+    }, 4500);
+  });
+
+  // Extra: set default active if hash present
+  if(window.location.hash) {
+    const activeId = window.location.hash.substring(1);
+    navLinks.forEach(link => {
+      if(link.getAttribute('href') === `#${activeId}`) link.classList.add('active');
+    });
+  }
+
+  // simple dynamic year footer can be used but not mandatory (already static)
+  // optional: for any external links prepend base, but all smooth.
+  // also ensures that logo & brand also navigate to home
+  const brandLink = document.querySelector('.navbar-brand');
+  if(brandLink) {
+    brandLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#home').scrollIntoView({behavior: 'smooth'});
+      navLinks.forEach(link => link.classList.remove('active'));
+      const homeNav = document.querySelector('.nav-link[href="#home"]');
+      if(homeNav) homeNav.classList.add('active');
+    });
+  }
+</script>
+</body>
+</html>
